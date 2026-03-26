@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    var url = "https://script.google.com/macros/s/AKfycbzJ55pA_zj5FRUNe7zKP38SH_SyPI9BkV2LBCxpKUJvsdDndrxv0Wy4fxYUqIwJ6Sv0ZQ/exec"; // 🔥 ใส่ลิงก์ GAS ของคุณ
+
+    function openApp() {
+      var ua = navigator.userAgent || "";
+
+      // Android → Chrome
+      if (/android/i.test(ua)) {
+        window.location.href = "intent://" + url.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
+        return;
+      }
+
+      // iOS → Safari (force)
+      if (/iPhone|iPad|iPod/i.test(ua)) {
+        window.location.href = url;
+        return;
+      }
+
+      // Browser ปกติ
+      window.location.href = url;
+    }
+
+    window.onload = function() {
+      openApp();
+
+      // fallback
+      setTimeout(function() {
+        document.getElementById("btn").style.display = "block";
+      }, 1500);
+    };
+  </script>
+</head>
+
+<body style="font-family:sans-serif;text-align:center;padding:40px">
+  <h2>กำลังเปิดเว็บไซต์...</h2>
+  <p>หากไม่เด้งอัตโนมัติ กรุณากดปุ่มด้านล่าง</p>
+
+  <a id="btn" href="#" onclick="openApp()" 
+     style="display:none;padding:12px 20px;background:#16a34a;color:#fff;border-radius:8px;text-decoration:none">
+     🔗 เปิดเว็บไซต์
+  </a>
+</body>
+</html>
